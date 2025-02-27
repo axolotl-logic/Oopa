@@ -1,11 +1,11 @@
-from collections import defaultdict
-import operator
 import re
+from collections import defaultdict
 
 from oopa.analysis import Analysis
 from oopa.table import AnalysisTable
 
 CHAR_MIN = 3
+
 
 class KeywordAnalysis(Analysis):
     """
@@ -24,22 +24,18 @@ class KeywordAnalysis(Analysis):
         Stores keyword counts in in self.keywords
         """
         keyword = word.lower()
-        keyword = re.sub(r'[^a-z]+$', '', keyword)
-        keyword = re.sub(r'^[^a-z]+', '', keyword)
+        keyword = re.sub(r"[^a-z]+$", "", keyword)
+        keyword = re.sub(r"^[^a-z]+", "", keyword)
 
         if len(keyword) >= CHAR_MIN:
             self.keywords[keyword] += 1
 
     def report(self):
         """
-        Reports top possible keywords 
+        Reports top possible keywords
         """
-        table = AnalysisTable(
-            ["Keyword", "Count"],
-            sortby="Count",
-            reversesort=True
-        )
-        for keyword, count in self.keywords.iteritems():
+        table = AnalysisTable(["Keyword", "Count"], sortby="Count", reversesort=True)
+        for keyword, count in self.keywords.items():
             table.add_row([keyword, count])
 
         return table

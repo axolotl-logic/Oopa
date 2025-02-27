@@ -2,6 +2,7 @@ import copy
 
 from prettytable import PrettyTable
 
+
 class AnalysisTable(PrettyTable):
 
     def _get_rows(self, options):
@@ -15,15 +16,15 @@ class AnalysisTable(PrettyTable):
         if options["sortby"]:
             sortindex = self._field_names.index(options["sortby"])
             # Decorate
-            rows = [[row[sortindex]]+row for row in rows]
+            rows = [[row[sortindex]] + row for row in rows]
             # Sort
             rows.sort(reverse=options["reversesort"], key=options["sort_key"])
             # Undecorate
             rows = [row[1:] for row in rows]
 
-        return rows[options["start"]:options["end"]]
+        return rows[options["start"] : options["end"]]
 
-    def greppable(self, sep=':'):
+    def greppable(self, sep=":"):
         """
         The table as a string that's grep friendly.
         Field names prefixed by #
@@ -32,9 +33,10 @@ class AnalysisTable(PrettyTable):
 
         output = "#" + sep.join(self._field_names)
         for row in self._get_rows(options):
-            output += "\n" + sep.join(map(unicode, row))
+            output += "\n" + sep.join(map(str, row))
 
         return output
+
 
 class FrequencyTable(AnalysisTable):
 
@@ -46,12 +48,12 @@ class FrequencyTable(AnalysisTable):
         field_names = [primary_field, "Percentage", "Count"]
 
         if "sortby" not in kwargs:
-            kwargs["reversesort"] =True
-            kwargs["sortby"] = "Count" 
+            kwargs["reversesort"] = True
+            kwargs["sortby"] = "Count"
 
         super(FrequencyTable, self).__init__(field_names, **kwargs)
 
     def add_counts(self, total, counts):
-        for key, count in counts.iteritems():
+        for key, count in counts.items():
             percent = round(count / float(total) * 100, 2)
             self.add_row([key, percent, count])

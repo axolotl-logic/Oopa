@@ -1,4 +1,4 @@
-#!/usr/bib/env python
+#!/usr/bin/env python
 
 """
 A tool to analyze wordlists
@@ -10,15 +10,16 @@ import importlib
 import inspect
 import pkgutil
 
-from oopa.analysis import Analysis
 import oopa.modules
+from oopa.analysis import Analysis
+
 
 def main():
     analysis_classes = find_analysis_classes()
 
     parser = argparse.ArgumentParser(
         description="Analyzes wordlists and prints pretty descriptions.",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     )
     parser.add_argument(
         "wordlist",
@@ -28,7 +29,7 @@ def main():
         "--analysis",
         help="Which analysis to run",
         required=True,
-        choices=analysis_classes.keys()
+        choices=analysis_classes.keys(),
     )
     parser.add_argument(
         "--encoding",
@@ -38,7 +39,7 @@ def main():
     parser.add_argument(
         "--greppable",
         help="An output able to easily be processed",
-        action='store_true',
+        action="store_true",
     )
     parser.add_argument(
         "--top",
@@ -67,7 +68,7 @@ def main():
     for word in words:
         analysis.process(word)
 
-    table = analysis.report() 
+    table = analysis.report()
     if args.sort is not None:
         table.reversesort = True
         table.sortby = args.sort
@@ -76,43 +77,45 @@ def main():
         table.end = int(args.top)
 
     if args.greppable:
-        print table.greppable()
+        print(table.greppable())
     else:
-        print table
+        print(table)
+
 
 def read_wordlist(path, encoding="raw"):
     if encoding == "raw":
         wordlist = open(path, "r")
     else:
-        wordlist = codecs.open(path, "r", encoding) 
+        wordlist = codecs.open(path, "r", encoding)
 
     return wordlist.read().splitlines()
+
 
 def find_analysis_classes():
     analyses = {}
 
     package_itr = pkgutil.walk_packages(
-        path=oopa.modules.__path__,
-        prefix=oopa.modules.__name__ + "."
-    );
+        path=oopa.modules.__path__, prefix=oopa.modules.__name__ + "."
+    )
 
-    for importer, mod_name, is_package in package_itr:
+    for _, mod_name, is_package in package_itr:
         if is_package:
             continue
 
         mod = importlib.import_module(mod_name)
 
         analysis = None
-        for name, member in inspect.getmembers(mod, inspect.isclass):
+        for _, member in inspect.getmembers(mod, inspect.isclass):
             if Analysis.__name__ in [c.__name__ for c in member.__bases__]:
                 analysis = member
-        
+
         if analysis is None:
-            print "Error: Analysis subclass not found in %s" % (mod.__path__)
+            print("Error: Analysis subclass not found in {}".format(mod.__path__))
 
         analyses[mod_name.split(".")[-1]] = analysis
 
     return analyses
+
 
 if __name__ == "__main__":
     main()
