@@ -1,8 +1,8 @@
 import re
 from collections import defaultdict
 
-from oopa.analysis import Analysis
-from oopa.table import AnalysisTable
+from ..analysis import Analysis
+from ..table import AnalysisTable
 
 CHAR_MIN = 3
 

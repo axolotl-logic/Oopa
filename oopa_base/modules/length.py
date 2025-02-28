@@ -4,8 +4,9 @@ Analyzes the length of words in a wordlist.
 
 from collections import defaultdict
 
-from oopa.analysis import Analysis
-from oopa.table import FrequencyTable
+from ..analysis import Analysis
+from ..table import FrequencyTable
+
 
 class LengthAnalysis(Analysis):
 

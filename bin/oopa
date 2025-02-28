@@ -10,8 +10,8 @@ import importlib
 import inspect
 import pkgutil
 
-import oopa.modules
-from oopa.analysis import Analysis
+from oopa_base import modules
+from oopa_base.analysis import Analysis
 
 
 def main():
@@ -95,7 +95,7 @@ def find_analysis_classes():
     analyses = {}
 
     package_itr = pkgutil.walk_packages(
-        path=oopa.modules.__path__, prefix=oopa.modules.__name__ + "."
+        path=modules.__path__, prefix=modules.__name__ + "."
     )
 
     for _, mod_name, is_package in package_itr:

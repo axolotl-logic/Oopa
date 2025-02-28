@@ -5,8 +5,8 @@ Analyzes the character sets used in a wordlist.
 import re
 from collections import OrderedDict
 
-from oopa.analysis import Analysis
-from oopa.table import FrequencyTable
+from ..analysis import Analysis
+from ..table import FrequencyTable
 
 
 class CharsetAnalysis(Analysis):
