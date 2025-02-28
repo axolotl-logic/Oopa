@@ -1,6 +1,6 @@
 # Oopa - Wordlist Analyzer
 
-## Overview
+## Overview [![PyPI - Version](https://img.shields.io/pypi/v/oopa)](https://pypi.org/project/oopa/)
 
 Oopa is an open source tool for studying password classification through the automated
 analysis of wordlists. It is highly modular, allowing
