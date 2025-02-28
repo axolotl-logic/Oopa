@@ -117,7 +117,7 @@ OOPA was briefly an acronym, but I soon forgot what it stood for.
 
 ## Distribution
 
-Increment version number first.
+Increment version number first in [[setup.py]]
 
 ```bash
 pip install setuptools wheel twine
