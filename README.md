@@ -114,3 +114,11 @@ You can change the column sorting is based on with --sort.
 ## Name
 
 OOPA was briefly an acronym, but I soon forgot what it stood for.
+
+## Distribution
+
+```bash
+pip install setuptools wheel twine
+python setup.py sdist bdist_wheel
+twine upload dist/*
+```
