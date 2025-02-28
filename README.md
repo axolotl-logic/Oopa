@@ -2,10 +2,10 @@
 
 ## Overview
 
-Oopa is a tool for studying password classification through the automated
+Oopa is an open source tool for studying password classification through the automated
 analysis of wordlists. It is highly modular, allowing
 open source contributors to write their own analyzers in Python with minimal
-effort. It supports user-supplied encoding and output can be
+effort and share with others. It supports user-supplied encoding. Output can be
 heavily customized.
 
 By design, this project has only one direct dependency and that is prettytable.
