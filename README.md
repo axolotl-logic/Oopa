@@ -117,6 +117,8 @@ OOPA was briefly an acronym, but I soon forgot what it stood for.
 
 ## Distribution
 
+Increment version number first.
+
 ```bash
 pip install setuptools wheel twine
 python setup.py sdist bdist_wheel
